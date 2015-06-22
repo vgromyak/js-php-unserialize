@@ -81,7 +81,7 @@ function unserialize (data) {
       var dtype, dataoffset, keyandchrs, keys,
         readdata, readData, ccount, stringlength,
         i, key, kprops, kchrs, vprops, vchrs, value,
-        chrs = 0,
+        objectName, chrs = 0,
         typeconvert = function (x) {
           return x;
         };
@@ -171,7 +171,7 @@ function unserialize (data) {
 
           keyandchrs = read_until(data, dataoffset, ':');
           dataoffset += keyandchrs[0] + 1;
-          var objectName = keyandchrs[1];
+          objectName = keyandchrs[1];
 
           keyandchrs = read_until(data, dataoffset, ':');
           chrs = keyandchrs[0];
