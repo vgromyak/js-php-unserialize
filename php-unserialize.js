@@ -189,7 +189,11 @@ function unserialize (data) {
             value = vprops[2];
             dataoffset += vchrs;
 
-            key = key.substring(objectName.length, key.length);
+            if (/^\0/.test(key)) {
+              key = key.substring(objectName.length, key.length);
+            } else if (/^\*/.test(key)) {
+              key = key.substring(1, key.length);
+            }
             readdata[key] = value;
           }
 
