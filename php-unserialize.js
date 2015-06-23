@@ -189,10 +189,13 @@ function unserialize (data) {
             value = vprops[2];
             dataoffset += vchrs;
 
-            if (/^\0/.test(key)) {
-              key = key.substring(objectName.length, key.length);
-            } else if (/^\*/.test(key)) {
+            //see http://www.phpinternalsbook.com/classes_objects/serialization.html
+            if (/^\0\*\0/.test(key)) {
+              //protected property of object
               key = key.substring(1, key.length);
+            } else if (/^\0/.test(key)) {
+              //private property of object
+              key = key.substring(objectName.length, key.length);
             }
             readdata[key] = value;
           }
